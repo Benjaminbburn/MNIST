@@ -6,7 +6,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 from torchvision import datasets, transforms
 from torch.optim.lr_scheduler import StepLR
-
+import time
 
 class Net(nn.Module):
     def __init__(self):
@@ -71,6 +71,8 @@ def test(model, device, test_loader):
 
 
 def main():
+    start_time = time.time()
+
     # Training settings
     parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
     parser.add_argument('--batch-size', type=int, default=64, metavar='N',
@@ -130,6 +132,7 @@ def main():
     if args.save_model:
         torch.save(model.state_dict(), "mnist_cnn.pt")
 
+    print(f"Total time: {time.time() - start_time}")
 
 if __name__ == '__main__':
     main()
